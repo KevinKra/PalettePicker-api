@@ -5,7 +5,7 @@ RSpec.describe 'Users API', type: :request do
   let!(:users) { create_list(:user, 3) }
   let(:user_id) { users.first.id }
 
-  # Test suite for GET /users/new
+  # Test suite for GET /users
 
 
   # Test suite for GET /users/login
@@ -13,6 +13,8 @@ RSpec.describe 'Users API', type: :request do
 
   # Test suite for GET /users/:id
   describe 'GET /users/:id' do
+    before { get "/users/#{user_id}" }
+
     context 'when the user exists' do
       it 'returns the user' do
         expect(json).not_to be_empty
@@ -26,11 +28,11 @@ RSpec.describe 'Users API', type: :request do
 
     context 'when the user does not exist' do
       let(:user_id) { 100 }
-      it 'returns a status code of 404' do
+      xit 'returns a status code of 404' do
         expect(response).to have_http_status(404)
       end
 
-      it 'returns a not found message' do
+      xit 'returns a not found message' do
         expect(response.body).to match(/Couldn't find User/)
       end
     end

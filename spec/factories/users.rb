@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :user do
     username { Faker::Name.name }
-    password { Fake::Coffee.variety }
+    password { Faker::Coffee.variety }
+    user_id { nil }
   end
 end
