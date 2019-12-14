@@ -31,6 +31,13 @@ group :development, :test do
   gem 'launchy'
   gem 'pry'
   gem 'simplecov'
+  gem 'shoulda-matchers'
+end
+
+group :test do
+  gem 'factory_bot_rails', '~> 4.0'
+  gem 'faker'
+  gem 'database_cleaner'
 end
 
 group :development do
