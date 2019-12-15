@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Palettes API' do
+RSpec.describe 'Palettes API', type: :request do
   # initialize test data
   let!(:user) { create(:user) }
   let!(:project) { create(:project, user_id: user.id) }
@@ -39,6 +39,10 @@ RSpec.describe 'Palettes API' do
       before { post "/users/#{user_id}/projects/#{project_id}/palettes", params: {} }
 
       it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a failure message' do
         expect(response.body).to match(/Validation failed: Title can't be blank/)
       end
     end
