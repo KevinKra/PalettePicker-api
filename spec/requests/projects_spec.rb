@@ -61,7 +61,7 @@ RSpec.describe 'Projects API', type: :request do
   end
 
   # Test suite for DELETE /users/:user_id/projects/:id
-  describe 'POST /users/:user_id/projects/:id' do
+  describe 'DELETE /users/:user_id/projects/:id' do
     before { delete "/users/#{user_id}/projects/#{id}" } 
 
     it 'returns status code 204' do
