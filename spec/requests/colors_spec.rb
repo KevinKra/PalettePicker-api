@@ -54,4 +54,20 @@ RSpec.describe 'Colors API', type: :request do
 
   # Test suite for destroy
   # DELETE "/users/:user_id/projects/:project_id/palettes/:palette_id/colors/:id"
+  describe 'DELETE /users/:user_id/projects/:project_id/palettes/:palette_id/colors/:id' do
+    before { delete "/users/#{user_id}/projects/#{project_id}/palettes/#{palette_id}/colors/#{id}" }
+
+    context 'request id attribute exists' do 
+      it 'returns with status code 204' do
+        expect(response).to have_http_status(204)
+      end
+    end
+
+    context 'request id attribute does not exist' do
+      before { delete "/users/#{user_id}/projects/#{project_id}/palettes/#{palette_id}/colors/0" }
+      it 'returns with status code 404' do
+        expect(response).to have_http_status(404)
+      end
+    end
+  end
 end
