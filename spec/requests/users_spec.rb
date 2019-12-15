@@ -28,14 +28,55 @@ RSpec.describe 'Users API', type: :request do
 
     context 'when the user does not exist' do
       let(:user_id) { 100 }
-      xit 'returns a status code of 404' do
+
+      it 'returns a status code of 404' do
         expect(response).to have_http_status(404)
       end
 
-      xit 'returns a not found message' do
+      it 'returns a not found message' do
         expect(response.body).to match(/Couldn't find User/)
       end
     end
   end
 
+  # Test suite for POST /users
+  describe 'POST /users' do
+    let(:valid_attributes) { { username: 'Tychus', password: 'password1' } }
+    
+    context 'when the request is valid' do
+      before { post '/users', params: valid_attributes }
+     
+      it 'creates a user' do
+        expect(json['username']).to eq('Tychus')
+        expect(json['password']).to eq('password1')
+      end
+
+      it 'returns a status code of 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+
+    context 'when the request is not valid' do
+      before { post '/users', params: { username: "Timmy" } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+      it 'returns a validation failure message' do
+        expect(response.body)
+          .to match(/Validation failed: Password can't be blank/)
+      end
+    end
+  end
+
+
+  # Test suite for DELETE /users/:id
+  describe 'DELETE /users/:id' do
+    before { delete "/users/#{user_id}" }
+
+    it 'returns with status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
 end
