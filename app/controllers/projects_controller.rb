@@ -1,5 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :set_projects
+  before_action :set_user_project, only: [:destroy]
   # GET /users/:user_id/projects
   def index 
     json_response(@user.projects)
@@ -12,6 +13,10 @@ class ProjectsController < ApplicationController
   end
 
   # DELETE /users/:user_id/projects/:id'
+  def destroy
+    @project.destroy
+    head :no_content
+  end
 
   private
   def project_params
@@ -20,5 +25,9 @@ class ProjectsController < ApplicationController
 
   def set_projects
     @user = User.find(params[:user_id])
+  end
+
+  def set_user_project
+    @project = @user.projects.find_by!(id: params[:id]) if @user
   end
 end
