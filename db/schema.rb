@@ -17,7 +17,6 @@ ActiveRecord::Schema.define(version: 2019_12_15_141703) do
 
   create_table "colors", force: :cascade do |t|
     t.string "hex_code"
-    t.boolean "locked"
     t.bigint "palette_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
