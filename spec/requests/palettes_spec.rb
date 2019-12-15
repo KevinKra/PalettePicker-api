@@ -9,7 +9,7 @@ RSpec.describe 'Palettes API' do
   let(:project_id) { project.id }
   let(:id) { palettes.first.id }
 
-  # Test suite for POST users/:user_id/projects/:project_id/palettes/:id
+  # Test suite for POST /users/:user_id/projects/:project_id/palettes/:id
   describe 'POST /users/:user_id/projects/:project_id/palettes' do
     let(:valid_attributes) { { title: "Aqua" } }
     before { post "/users/#{user_id}/projects/#{project_id}/palettes", params: valid_attributes }
@@ -29,5 +29,11 @@ RSpec.describe 'Palettes API' do
     end
   end
 
-  # Test suite for DELETE users/:user_id/projects/:project_id/palettes/:id
+  # Test suite for DELETE /users/:user_id/projects/:project_id/palettes/:id
+  describe 'DELETE /users/:user_id/projects/:project_id/palettes/:id' do
+    before { delete "/users/#{user_id}/projects/#{project_id}/palettes/#{id}"}
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
 end
