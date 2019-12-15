@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
 
   # POST /users/:user_id/projects/:id'
   def create
-    response = @user.projects.create!(project_params)
+    response = @projects.create!(project_params)
     json_response(response, :created)
   end
 
@@ -19,15 +19,20 @@ class ProjectsController < ApplicationController
   end
 
   private
-  def project_params
-    params.permit(:title, :description)
-  end
+    def set_user
+      @user = User.find(params[:user_id])
+    end
 
-  def set_projects
-    @user = User.find(params[:user_id])
-  end
+    def project_params
+      params.permit(:title, :description)
+    end
 
-  def set_user_project
-    @project = @user.projects.find_by!(id: params[:id]) if @user
-  end
+    def set_projects
+      set_user
+      @projects = @user.projects
+    end
+
+    def set_user_project
+      @project = @user.projects.find_by!(id: params[:id]) if @user
+    end
 end
