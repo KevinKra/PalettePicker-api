@@ -51,7 +51,8 @@ RSpec.describe 'Palettes API', type: :request do
   # Test suite for DELETE /users/:user_id/projects/:project_id/palettes/:id
   describe 'DELETE /users/:user_id/projects/:project_id/palettes/:id' do
     before { delete "/users/#{user_id}/projects/#{project_id}/palettes/#{id}"}
-    it 'returns status code 204' do
+    
+    it 'returns with status code 204' do
       expect(response).to have_http_status(204)
     end
   end

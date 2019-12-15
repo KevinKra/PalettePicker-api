@@ -30,6 +30,6 @@ class PalettesController < ApplicationController
   end
 
   def set_project_palette
-    @palette = @project.palettes.find_by!(id: params[:id])
+    @palette = @project.palettes.find_by!(id: params[:id]) if @project
   end
 end
