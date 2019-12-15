@@ -2,6 +2,11 @@ class PalettesController < ApplicationController
   before_action :set_user_project
   before_action :set_project_palette, only: [:destroy]
 
+  # GET /users/:user_id/projects/:project_id/palettes
+  def index
+    json_response(@project.palettes.all)
+  end
+
   # POST /users/:user_id/projects/:project_id/palettes/:id
   def create
     @project.palettes.create!(palette_params)

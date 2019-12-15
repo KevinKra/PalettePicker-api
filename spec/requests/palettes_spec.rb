@@ -9,6 +9,21 @@ RSpec.describe 'Palettes API' do
   let(:project_id) { project.id }
   let(:id) { palettes.first.id }
 
+  # Test suite for GET /users/:user_id/projects/:project_id/palettes
+  describe 'GET /users/:user_id/projects/:project_id/palettes' do
+    before { get "/users/#{user_id}/projects/#{project_id}/palettes" }
+
+    context 'when the palettes exist' do
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+
+      it 'returns content' do
+        expect(json.size).to be(5)
+      end
+    end
+  end
+
   # Test suite for POST /users/:user_id/projects/:project_id/palettes/:id
   describe 'POST /users/:user_id/projects/:project_id/palettes' do
     let(:valid_attributes) { { title: "Aqua" } }
