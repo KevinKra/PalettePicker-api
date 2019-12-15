@@ -8,8 +8,8 @@ class ProjectsController < ApplicationController
 
   # POST /users/:user_id/projects/:id'
   def create
-    @user.projects.create!(project_params)
-    json_response(@user, :created)
+    response = @user.projects.create!(project_params)
+    json_response(response, :created)
   end
 
   # DELETE /users/:user_id/projects/:id'

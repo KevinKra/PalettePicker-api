@@ -9,8 +9,8 @@ class PalettesController < ApplicationController
 
   # POST /users/:user_id/projects/:project_id/palettes/:id
   def create
-    @project.palettes.create!(palette_params)
-    json_response(@project, :created)
+    response = @project.palettes.create!(palette_params)
+    json_response(response, :created)
   end
 
   # DELETE /users/:user_id/projects/:project_id/palettes/:id
